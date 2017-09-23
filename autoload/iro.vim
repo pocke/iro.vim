@@ -1,6 +1,7 @@
 let g:iro_ruby = get(g:, 'iro_ruby', [
 \   ['tstring_content', 'String'],
 \   ['comment', 'Comment'],
+\   ['var_ref', 'PreProc'],
 \ ])
 
 let s:self_path=expand("<sfile>")

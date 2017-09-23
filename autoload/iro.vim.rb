@@ -3,7 +3,52 @@
 require 'ripper'
 
 module Iro
-  class Parser < Ripper
+  module RipperWrapper
+    refine Array do
+      def type
+        self.first
+      end
+
+      def children
+        [].tap do |res|
+          self[1..-1].each do |child|
+            if child.is_a?(Array)
+              if child.node?
+                res << child
+              else
+                res.concat(child)
+              end
+            else
+              res << child
+            end
+          end
+        end
+      end
+
+      def content
+        self[1]
+      end
+
+      def position
+        self[2]
+      end
+
+      def node?
+        self.first.is_a?(Symbol)
+      end
+
+      def parser_event?
+        type =~ /\A@/
+      end
+
+      def scanner_event?
+        type !~ /\A@/
+      end
+    end
+  end
+  using RipperWrapper
+
+  class Parser < Ripper::SexpBuilderPP
     def initialize(*)
       super
       @tokens = {}
@@ -24,9 +69,11 @@ module Iro
     end
 
     rules = ::Vim.evaluate('g:iro_ruby')
-    rules.each do |tok_type, group|
-      eval <<~END
+    scanner_events = Ripper::SCANNER_EVENTS.map(&:to_s)
+    rules.select{|r| scanner_events.include?(r[0])}.each do |tok_type, group|
+      eval <<~RUBY
         def on_#{tok_type}(str)
+          super
           str.split("\\n").each.with_index do |s, idx|
             register_token #{group.inspect}, [
               lineno + idx,
@@ -34,14 +81,37 @@ module Iro
               s.size]
           end
         end
-      END
+      RUBY
+    end
+
+    # For lvar
+    if rule = rules.find{|r| r.first == 'var_ref'}
+      define_method :traverse do |node|
+        return if node.parser_event?
+
+        if node.type == :var_ref
+          ident = node.children.first
+          if ident.type == :@ident
+            pos = ident.position
+            register_token rule[1], [pos[0], pos[1]+1, ident.content.size]
+          end
+        end
+        node.children.each do |child|
+          traverse(child) if child.is_a?(Array)
+        end
+      end
+    else
+      def traverse(node)
+      end
     end
   end
+
 
   def self.highlight(bufnr)
     source = ::Vim.evaluate("getbufline(#{bufnr}, 1, '$')").join("\n")
     parser = Parser.new(source)
-    parser.parse
+    sexp = parser.parse
+    parser.traverse(sexp)
     parser.highlight
   end
 end
