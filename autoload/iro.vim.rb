@@ -89,13 +89,13 @@ module Iro
     rules.select{|r| scanner_events.include?(r[0])}.each do |tok_type, group|
       eval <<~RUBY
         def on_#{tok_type}(str)
-          super
           str.split("\\n").each.with_index do |s, idx|
             register_token #{group.inspect}, [
               lineno + idx,
               idx == 0 ? column+1 : 1,
               s.size]
           end
+          super
         end
       RUBY
     end
