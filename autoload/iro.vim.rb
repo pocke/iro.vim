@@ -63,7 +63,7 @@ module Iro
       @tokens.each do |group, tokens|
         tokens.each_slice(8) do |ts|
           # TODO: match ID
-          ::Vim.evaluate("matchaddpos(#{group.inspect}, #{ts.inspect})")
+          ::Vim.evaluate("matchaddpos(#{group.inspect}, #{ts.inspect}, -1)")
         end
       end
     end
