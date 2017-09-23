@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require 'ripper'
+require 'json'
 
+# TODO: Iro::Ruby::RipperWrapper
 module Iro
   module RipperWrapper
     refine Array do
@@ -65,6 +67,8 @@ module Iro
   using RipperWrapper
 
   class Parser < Ripper::SexpBuilderPP
+    attr_reader :tokens
+
     def initialize(*)
       super
       @tokens = {}
@@ -73,15 +77,6 @@ module Iro
     def register_token(group, token)
       @tokens[group] ||= []
       @tokens[group] << token
-    end
-
-    def highlight
-      @tokens.each do |group, tokens|
-        tokens.each_slice(8) do |ts|
-          # TODO: match ID
-          ::Vim.evaluate("matchaddpos(#{group.inspect}, #{ts.inspect}, -1)")
-        end
-      end
     end
 
     rules = ::Vim.evaluate('g:iro#ruby#definitions')
@@ -123,11 +118,11 @@ module Iro
   end
 
 
-  def self.highlight(bufnr)
+  def self.tokens(bufnr)
     source = ::Vim.evaluate("getbufline(#{bufnr}, 1, '$')").join("\n")
     parser = Parser.new(source)
     sexp = parser.parse
-    parser.traverse(sexp)
-    parser.highlight
+    parser.traverse(sexp) unless parser.error?
+    ::Vim.command "let s:result = #{parser.tokens.to_json}"
   end
 end

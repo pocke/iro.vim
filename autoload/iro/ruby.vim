@@ -22,6 +22,9 @@ let g:iro#ruby#definitions = get(g:, 'iro#ruby#definitions', [
 let s:self_path=expand("<sfile>")
 execute 'rubyfile ' . s:self_path . '.rb'
 
-function! iro#ruby#highlight() abort
-  execute 'ruby Iro.highlight(' . bufnr('%') . ')'
+function! iro#ruby#tokens() abort
+  execute 'ruby Iro.tokens(' . bufnr('%') . ')'
+  let result = s:result
+  unlet s:result
+  return result
 endfunction
