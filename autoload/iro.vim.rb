@@ -44,6 +44,22 @@ module Iro
       def scanner_event?
         type !~ /\A@/
       end
+
+      Ripper::SCANNER_EVENTS.each do |e|
+        eval <<~RUBY
+          def #{e}_type?
+            type == #{:"@#{e}".inspect}
+          end
+        RUBY
+      end
+
+      Ripper::PARSER_EVENTS.each do |e|
+        eval <<~RUBY
+          def #{e}_type?
+            type == #{e.inspect}
+          end
+        RUBY
+      end
     end
   end
   using RipperWrapper
@@ -89,9 +105,9 @@ module Iro
       define_method :traverse do |node|
         return if node.parser_event?
 
-        if node.type == :var_ref
+        if node.var_ref_type?
           ident = node.children.first
-          if ident.type == :@ident
+          if ident.ident_type?
             pos = ident.position
             register_token rule[1], [pos[0], pos[1]+1, ident.content.size]
           end
