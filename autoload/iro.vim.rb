@@ -27,7 +27,12 @@ module Iro
     rules.each do |tok_type, group|
       eval <<~END
         def on_#{tok_type}(str)
-          register_token #{group.inspect}, [lineno, column+1, str.size]
+          str.split("\\n").each.with_index do |s, idx|
+            register_token #{group.inspect}, [
+              lineno + idx,
+              idx == 0 ? column+1 : 1,
+              s.size]
+          end
         end
       END
     end
@@ -35,7 +40,7 @@ module Iro
 
   def self.highlight(bufnr)
     source = ::Vim.evaluate("getbufline(#{bufnr}, 1, '$')").join("\n")
-    parser = self::Parser.new(source)
+    parser = Parser.new(source)
     parser.parse
     parser.highlight
   end
