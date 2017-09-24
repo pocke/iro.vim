@@ -1,10 +1,5 @@
 module Iro
   class << self
-    def refresh(winnr, ft)
-      clean(winnr)
-      draw(winnr, ft)
-    end
-
     def clean(winnr)
       ids = Vim.evaluate('get(w:, "iro_match_ids", [])')
       ids.each do |id|
