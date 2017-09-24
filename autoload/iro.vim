@@ -3,6 +3,7 @@ execute 'rubyfile ' . s:self_path . '.rb'
 
 let g:iro#enabled_filetypes = {
 \   'ruby': 1,
+\   'python': 1,
 \ }
 
 function! iro#redraw() abort
