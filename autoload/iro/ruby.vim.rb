@@ -3,7 +3,6 @@
 require 'ripper'
 require 'json'
 
-# TODO: Iro::Ruby::RipperWrapper
 module Iro
   module Ruby
     module RipperWrapper
