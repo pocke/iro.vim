@@ -23,7 +23,7 @@ let s:self_path=expand("<sfile>")
 execute 'rubyfile ' . s:self_path . '.rb'
 
 function! iro#ruby#tokens() abort
-  execute 'ruby Iro.tokens(' . bufnr('%') . ')'
+  execute 'ruby Iro::Ruby.tokens(' . bufnr('%') . ')'
   let result = s:result
   unlet s:result
   return result
