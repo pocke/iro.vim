@@ -24,6 +24,14 @@ let b:current_syntax = '<LANG>'
 
 `<LANG>` is a language name that you want to enable iro.vim (e.g. `ruby`).
 
+Requirements
+-----
+
+
+- Vim 8 or newer
+- `+if_ruby` 
+- `+if_python` (if python highlight is needed)
+
 Supported Languages
 ----------
 
