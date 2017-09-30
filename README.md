@@ -12,6 +12,11 @@ Installation
 Use some plugin manager.
 
 
+What's different from standard syntax highlighter?
+--------
+
+TODO...
+
 
 Usage
 -------
