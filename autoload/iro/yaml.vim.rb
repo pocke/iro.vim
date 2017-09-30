@@ -12,14 +12,18 @@ module Iro
           traverse(value)
         end
       when Psych::Nodes::Scalar
-        case @scanner.tokenize(node.value)
-        when String
+        case node.to_ruby
+        when String, Symbol
           register_token 'String', node
         when TrueClass, FalseClass
           register_token 'Boolean', node
         when Integer
           register_token 'Number', node
+        when Float
+          register_token 'Float', node
         end
+      when Psych::Nodes::Alias
+        register_token 'Identifier', node
       else
         node.children&.each do |c|
           traverse(c)
@@ -46,11 +50,11 @@ module Iro
     end
 
     def self.tokens(bufnr)
-      @tokens = {}
-      @scanner = Psych::ScalarScanner.new(Psych::ClassLoader.new)
       source = ::Vim.evaluate("getbufline(#{bufnr}, 1, '$')").join("\n")
+      node = Psych.parse(source)
+
+      @tokens = {}
       @source = source.force_encoding(Encoding::UTF_8).split("\n")
-      node = Psych::Parser.new(Psych::TreeBuilder.new).parse(source).handler.root
       traverse(node)
       ::Vim.command "let s:result = #{@tokens.to_json}"
     end
