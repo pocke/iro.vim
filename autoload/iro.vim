@@ -7,6 +7,11 @@ let g:iro#enabled_filetypes = {
 \ }
 
 function! iro#redraw() abort
+  " See https://github.com/todesking/ruby_hl_lvar.vim/blob/fd52ba13f1b5fee2a4413de9704ef91ea3ffdfc4/autoload/ruby_hl_lvar.vim#L138
+  if mode() =~# "^[vV\<C-v>]"
+    return
+  endif
+
   let cur_wn = winnr()
   let prev_wn = winnr('#')
   let lastwn = winnr('$')
