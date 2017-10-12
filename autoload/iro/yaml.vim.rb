@@ -52,11 +52,17 @@ module Iro
     def self.tokens(bufnr)
       source = ::Vim.evaluate("getbufline(#{bufnr}, 1, '$')").join("\n")
       node = Psych.parse(source)
+      if node == false # Psych.parse returns false when parsing empty file.
+        ::Vim.command "let s:result = {}"
+        return
+      end
 
       @tokens = {}
       @source = source.force_encoding(Encoding::UTF_8).split("\n")
       traverse(node)
       ::Vim.command "let s:result = #{@tokens.to_json}"
+    rescue Psych::SyntaxError
+      ::Vim.command "let s:result = {}"
     end
   end
 end
