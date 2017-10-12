@@ -36,6 +36,7 @@ Requirements
 - Vim 8 or newer
 - `+if_ruby` 
 - `+if_python` (if python highlight is needed)
+- psych gem version 3.0.0.beta3 (if yaml highlight is needed)
 
 Supported Languages
 ----------
