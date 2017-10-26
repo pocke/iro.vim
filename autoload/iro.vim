@@ -1,11 +1,12 @@
 let s:self_path=expand("<sfile>")
 execute 'rubyfile ' . s:self_path . '.rb'
 
-let g:iro#enabled_filetypes = {
+" TODO: merge
+let g:iro#enabled_filetypes = get(g:, 'iro#enabled_filetypes', {
 \   'ruby': 1,
 \   'yaml': 1,
 \   'python': 0,
-\ }
+\ })
 
 function! iro#redraw() abort
   " See https://github.com/todesking/ruby_hl_lvar.vim/blob/fd52ba13f1b5fee2a4413de9704ef91ea3ffdfc4/autoload/ruby_hl_lvar.vim#L138

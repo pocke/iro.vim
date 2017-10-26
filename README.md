@@ -18,16 +18,6 @@ What's different from standard syntax highlighter?
 TODO...
 
 
-Usage
--------
-
-Put the below code to `~/.vim/syntax/<LANG>.vim`.
-
-```vim
-let b:current_syntax = '<LANG>'
-```
-
-`<LANG>` is a language name that you want to enable iro.vim (e.g. `ruby`).
 
 Requirements
 -----
