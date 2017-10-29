@@ -1,5 +1,6 @@
 let g:iro#ruby#definitions = get(g:, 'iro#ruby#definitions', [
 \   ['tstring_content', 'String'],
+\   ['CHAR', 'Character'],
 \   ['int', 'Number'],
 \   ['float', 'Float'],
 \
