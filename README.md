@@ -32,6 +32,7 @@ Supported Languages
 ----------
 
 - Ruby
+- YAML
 - Python (experimental)
 
 License
