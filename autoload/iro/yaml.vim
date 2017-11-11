@@ -1,5 +1,5 @@
 let s:self_path=expand("<sfile>")
-execute 'rubyfile ' . s:self_path . '.rb'
+execute 'ruby require "' . s:self_path . '.rb"'
 
 function! iro#yaml#tokens() abort
   execute 'ruby Iro::YAML.tokens(' . bufnr('%') . ')'
