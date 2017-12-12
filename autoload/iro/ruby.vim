@@ -6,6 +6,9 @@ let g:iro#ruby#definitions = get(g:, 'iro#ruby#definitions', [
 \
 \   ['kw', 'Keyword'],
 \   ['comment', 'Comment'],
+\   ['embdoc', 'Comment'],
+\   ['embdoc_beg', 'Comment'],
+\   ['embdoc_end', 'Comment'],
 \   ['const', 'Type'],
 \
 \   ['regexp_beg', 'Delimiter'],
