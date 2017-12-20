@@ -16,6 +16,6 @@ function! Iro_filetype() abort
   execute 'augroup ' . groupname
     autocmd!
     call iro#redraw()
-    autocmd InsertLeave,TextChanged <buffer> call iro#redraw()
+    autocmd TextChangedi,TextChanged <buffer> call iro#redraw()
   augroup END
 endfunction
