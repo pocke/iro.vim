@@ -15,9 +15,7 @@ function! Iro_filetype() abort
   let groupname = 'iro_' . bufnr('%')
   execute 'augroup ' . groupname
     autocmd!
-    for ft in iro#available_filetypes()
-      call iro#redraw()
-      autocmd InsertLeave,TextChanged <buffer> call iro#redraw()
-    endfor
+    call iro#redraw()
+    autocmd InsertLeave,TextChanged <buffer> call iro#redraw()
   augroup END
 endfunction
