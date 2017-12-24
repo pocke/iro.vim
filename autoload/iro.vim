@@ -14,6 +14,10 @@ function! iro#redraw() abort
     return
   endif
 
+  if empty(iro#available_filetypes())
+    return
+  endif
+
   let cur_wn = winnr()
   let prev_wn = winnr('#')
   let lastwn = winnr('$')
