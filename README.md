@@ -38,7 +38,7 @@ Supported Languages
 License
 -------
 
-Copyright 2017 Masataka Pocke Kuwabara
+Copyright 2017-2018 Masataka Pocke Kuwabara
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
