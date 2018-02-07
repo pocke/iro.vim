@@ -102,7 +102,7 @@ module Iro
           ident = node.children.first
           if ident.ident_type?
             pos = ident.position
-            register_token rule[1], [pos[0], pos[1]+1, ident.content.size]
+            register_token 'rubyLocalVariable', [pos[0], pos[1]+1, ident.content.size]
           end
         end
         node.children.each do |child|
