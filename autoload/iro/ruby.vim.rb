@@ -95,24 +95,18 @@ module Iro
         RUBY
       end
 
-      # For lvar
-      if rule = rules.find{|r| r.first == 'var_ref'}
-        define_method :traverse do |node|
-          return if node.parser_event?
+      def traverse(node)
+        return if node.parser_event?
 
-          if node.var_ref_type?
-            ident = node.children.first
-            if ident.ident_type?
-              pos = ident.position
-              register_token rule[1], [pos[0], pos[1]+1, ident.content.size]
-            end
-          end
-          node.children.each do |child|
-            traverse(child) if child.is_a?(Array)
+        if node.var_ref_type?
+          ident = node.children.first
+          if ident.ident_type?
+            pos = ident.position
+            register_token rule[1], [pos[0], pos[1]+1, ident.content.size]
           end
         end
-      else
-        def traverse(node)
+        node.children.each do |child|
+          traverse(child) if child.is_a?(Array)
         end
       end
     end

@@ -19,8 +19,6 @@ let g:iro#ruby#definitions = get(g:, 'iro#ruby#definitions', [
 \   ['tstring_end', 'Delimiter'],
 \   ['embexpr_beg', 'Delimiter'],
 \   ['embexpr_end', 'Delimiter'],
-\
-\   ['var_ref', 'PreProc'],
 \ ])
 
 let s:self_path=expand("<sfile>")
