@@ -21,9 +21,9 @@ function! Iro_filetype() abort
   augroup END
 endfunction
 
-function! s:iro_clean()
-  let filetypes = keys(g:iro#enabled_filetypes)
-  if !count(filetypes, &filetype)
+function! s:iro_clean() abort
+  let filetypes = iro#available_filetypes()
+  if len(filetypes) == 0
     execute printf('ruby Iro.clean(%d)', winnr())
   endif
 endfunction
