@@ -25,8 +25,9 @@ Requirements
 
 - Vim 8 or newer
 - `+if_ruby` 
-- `+if_python` (if python highlight is needed)
-- psych gem version 3.0.0 or higher (if yaml highlight is needed)
+- `+if_python` (For Python highlight)
+- psych gem version 3.0.0 or higher (for YAML highlight)
+- iro gem (for Ruby highlight)
 
 Supported Languages
 ----------
