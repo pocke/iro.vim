@@ -24,6 +24,6 @@ endfunction
 function! s:iro_clean() abort
   let filetypes = iro#available_filetypes()
   if len(filetypes) == 0
-    execute printf('ruby Iro.clean(%d)', winnr())
+    execute printf('ruby IroVim.clean(%d)', winnr())
   endif
 endfunction

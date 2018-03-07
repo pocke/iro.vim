@@ -25,10 +25,10 @@ function! iro#redraw() abort
   for wn in range(1, lastwn)
     execute wn . 'wincmd w'
 
-    execute printf('ruby Iro.clean(%d)', wn)
+    execute printf('ruby IroVim.clean(%d)', wn)
 
     for ft in iro#available_filetypes()
-      execute printf('ruby Iro.draw(%d, "%s")', wn, ft)
+      execute printf('ruby IroVim.draw(%d, "%s")', wn, ft)
     endfor
   endfor
 
