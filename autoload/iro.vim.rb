@@ -1,4 +1,4 @@
-module Iro
+module IroVim
   class << self
     def clean(winnr)
       ids = Vim.evaluate('get(w:, "iro_match_ids", [])')

@@ -2,7 +2,7 @@ gem 'psych', '>= 3.0.0'
 require 'psych'
 require 'json'
 
-module Iro
+module IroVim
   module YAML
     def self.traverse(node)
       case node
