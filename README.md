@@ -28,6 +28,7 @@ Requirements
 - `+if_python` (For Python highlight)
 - psych gem version 3.0.0 or higher (for YAML highlight)
 - iro gem (for Ruby highlight)
+  - You can execute `bundle install` in this directory each updates.
 
 Supported Languages
 ----------
