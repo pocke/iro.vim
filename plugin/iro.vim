@@ -1,3 +1,7 @@
+if $IRO_DISABLED
+  let g:iro#enabled_filetypes = {'ruby': 0, 'python': 0, 'yaml': 0}
+endif
+
 if !has('ruby')
   echoerr "iro.vim: This plugin does not work without has('ruby')"
   finish
