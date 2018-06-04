@@ -1,0 +1,43 @@
+*iro.txt*		a next generation syntax highlighter
+
+Version: 0.1.0-dev
+Author:  Masataka Pocke Kuwabara
+Support: Vim 8.0.0000 or newer with if_ruby
+License: Apache v2 (See LICENSE)
+
+
+=============================================================================
+CONTENTS					*iro-contents*
+
+INTRODUCTION			|iro-introduction|
+USAGE				|iro-usage|
+CHANGELOG			|iro-changelog|
+
+
+=============================================================================
+INTRODUCTION					*iro-introduction*
+
+*iro.vim* is a Vim plugin that is a next generation syntax highlighter.
+
+This support following programming languages' syntaxes.
+
+- Ruby
+- YAML
+- Python (experimental)
+
+Latest version:~
+https://github.com/pocke/iro.vim
+
+
+=============================================================================
+USAGE						*iro-usage*
+
+TODO
+
+=============================================================================
+CHANGELOG					*iro-changelog*
+
+TODO
+
+=============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
