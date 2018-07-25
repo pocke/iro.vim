@@ -1,5 +1,5 @@
 let s:self_path=expand("<sfile>")
-execute 'ruby require "' . s:self_path . '.rb"'
+execute "ruby require '" . s:self_path . ".rb'"
 
 " TODO: merge
 let g:iro#enabled_filetypes = get(g:, 'iro#enabled_filetypes', {

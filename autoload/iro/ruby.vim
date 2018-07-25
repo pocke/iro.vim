@@ -1,5 +1,5 @@
 let s:self_path=expand("<sfile>")
-execute 'ruby require "' . s:self_path . '.rb"'
+execute "ruby require '" . s:self_path . ".rb'"
 
 function! iro#ruby#tokens() abort
   execute 'ruby IroVim::Ruby.parse(' . bufnr('%') . ')'
