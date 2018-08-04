@@ -25,6 +25,8 @@ module IroVim
 
       def vim_to_ruby(vim_enc)
         case vim_enc
+        when ''
+          vim_to_ruby(Vim.evaluate("&encoding"))
         when 'utf-8'
           ::Encoding::UTF_8
         when 'latin1'
