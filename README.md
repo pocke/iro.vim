@@ -11,6 +11,12 @@ Installation
 
 Use some plugin manager.
 
+Example to use [vim-plug](https://github.com/junegunn/vim-plug)
+
+```viml
+Plug 'pocke/iro.vim', { 'do': 'bundle install'}
+```
+
 
 What's different from standard syntax highlighter?
 --------
